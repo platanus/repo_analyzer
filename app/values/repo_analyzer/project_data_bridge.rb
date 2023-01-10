@@ -2,26 +2,25 @@ module RepoAnalyzer
   class ProjectDataBridge
     EXCLUDED_FILE_NAMES = %w{. .. .keep .gitkeep}
 
-    def initialize(repo_name)
-      @repo_name = repo_name
-    end
+    attr_reader :project_path
 
-    def tmp_repo_path
-      "tmp/#{repo_name}"
+    def initialize(repo_name, project_path = '.')
+      @repo_name = repo_name
+      @project_path = project_path
     end
 
     def file_exist?(file_path)
-      File.exist?("#{tmp_repo_path}/#{file_path}")
+      File.exist?("#{project_path}/#{file_path}")
     end
 
     def file_content(file_path)
       return unless file_exist?(file_path)
 
-      File.open("#{tmp_repo_path}/#{file_path}").read
+      File.open("#{project_path}/#{file_path}").read
     end
 
     def dir_files(dir_path)
-      Dir.glob("#{tmp_repo_path}/#{dir_path}/**/*").reject do |file_name|
+      Dir.glob("#{project_path}/#{dir_path}/**/*").reject do |file_name|
         EXCLUDED_FILE_NAMES.include?(file_name)
       end
     rescue Errno::ENOENT

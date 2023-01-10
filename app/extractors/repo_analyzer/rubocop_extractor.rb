@@ -49,7 +49,7 @@ module RepoAnalyzer
 
     def offense_file_name(file_path, offense)
       [
-        file_path.gsub(%r{\A\D*#{project_data_bridge.tmp_repo_path}/}, ""),
+        file_path.gsub(%r{\A\D*#{project_data_bridge.project_path}/}, ""),
         offense['location']['line'].to_s,
         offense['location']['column'].to_s
       ].join(':')
@@ -60,7 +60,7 @@ module RepoAnalyzer
         [
           "--format", "json",
           "--config", Rails.root.join(".rubocop.yml").to_s,
-          project_data_bridge.tmp_repo_path
+          project_data_bridge.project_path
         ]
       )
 

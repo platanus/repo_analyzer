@@ -9,7 +9,7 @@ module RepoAnalyzer
 
     def errors
       @errors ||= analyzer.errors.map do |error|
-        next unless error.filename.include?(project_data_bridge.tmp_repo_path)
+        next unless error.filename.include?(project_data_bridge.project_path)
 
         {
           file_path: get_file_path(error),
@@ -22,14 +22,14 @@ module RepoAnalyzer
 
     def get_file_path(error)
       [
-        error.filename.gsub(%r{\A\D*#{project_data_bridge.tmp_repo_path}/}, ""),
+        error.filename.gsub(%r{\A\D*#{project_data_bridge.project_path}/}, ""),
         error.line_number
       ].reject(&:blank?).join(":")
     end
 
     def analyzer
       @analyzer ||= RailsBestPractices::Analyzer.new(
-        project_data_bridge.tmp_repo_path
+        project_data_bridge.project_path
       )
     end
   end

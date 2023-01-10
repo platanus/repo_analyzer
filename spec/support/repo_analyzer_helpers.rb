@@ -26,7 +26,7 @@ module RepoAnalyzerExtractorHelpers
     end
 
     before do
-      allow(project_data_bridge).to receive(:tmp_repo_path).and_return(project_path)
+      allow(project_data_bridge).to receive(:project_path).and_return(project_path)
       allow(GithubClient).to receive(:new).and_return(github_client)
     end
   end

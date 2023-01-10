@@ -14,7 +14,7 @@ module RepoAnalyzer
 
     def brakeman_info
       @brakeman_info ||= begin
-        tracker = Brakeman.run(app_path: project_data_bridge.tmp_repo_path)
+        tracker = Brakeman.run(app_path: project_data_bridge.project_path)
         tracker.checks.warnings.map do |warning|
           {
             warning_type: warning.warning_type,
