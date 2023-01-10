@@ -9,7 +9,7 @@ module RepoAnalyzer
     RSPEC_REGEXP = /(rspec\.xml)/
     RSPEC_REGEXP_ALT = /(cibuild\stests)/
     SYSTEM_REGEXP = /(rspec-system\.xml)/
-    PLATANUS_COMPOSE_REGEXP = %r{(platanus\/compose)}
+    PLATANUS_COMPOSE_REGEXP = %r{(platanus/compose)}
 
     private
 

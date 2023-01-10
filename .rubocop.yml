@@ -193,6 +193,8 @@ Style/WhileUntilModifier:
   Description: Favor modifier while/until usage when you have a single-line body.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#while-as-a-modifier
   Enabled: false
+Style/WordArray:
+  Enabled: false
 Style/ExponentialNotation:
   Enabled: true
 Style/HashEachMethods:
