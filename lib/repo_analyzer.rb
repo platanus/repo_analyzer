@@ -1,3 +1,12 @@
+require "brakeman"
+require "octokit"
+require "rails_best_practices"
+require "rubocop"
+require "rubocop-performance"
+require "rubocop-platanus"
+require "rubocop-rails"
+require "rubocop-rspec"
+
 require "repo_analyzer/engine"
 
 module RepoAnalyzer
