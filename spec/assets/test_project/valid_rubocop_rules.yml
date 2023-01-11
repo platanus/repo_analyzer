@@ -1,0 +1,54 @@
+require:
+  - rubocop-rspec
+  - rubocop-rails
+  - rubocop-performance
+AllCops:
+  Exclude:
+  - "vendor/**/*"
+  - "db/**/*"
+  - "bin/**/*"
+  TargetRubyVersion: 2.7
+Rails:
+  Enabled: true
+Performance:
+  Enabled: true
+Layout/ParameterAlignment:
+  Description: Align the parameters of a method call if they span more than one line.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-double-indent
+  Enabled: true
+  EnforcedStyle: with_fixed_indentation
+  SupportedStyles:
+  - with_first_parameter
+  - with_fixed_indentation
+Metrics/BlockLength:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Description: Checks style of children classes and modules.
+  Enabled: false
+  EnforcedStyle: nested
+  SupportedStyles:
+  - nested
+  - compact
+Style/FormatString:
+  Description: Enforce the use of Kernel#sprintf, Kernel#format or String#%.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#sprintf
+  Enabled: false
+  EnforcedStyle: format
+  SupportedStyles:
+  - format
+  - sprintf
+  - percent
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Lint/StructNewOverride:
+  Description: Disallow overriding the `Struct` built-in methods via `Struct.new`.
+  Enabled: true
+Rails/Delegate:
+  Description: Prefer delegate method for delegations.
+  Enabled: false
+Performance/RedundantBlockCall:
+  Description: Use `yield` instead of `block.call`.
+  Reference: https://github.com/JuanitoFatas/fast-ruby#proccall-vs-yield-code
+  Enabled: false
+RSpec/MultipleExpectations:
+  Max: 5
