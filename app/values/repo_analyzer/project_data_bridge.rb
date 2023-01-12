@@ -4,7 +4,7 @@ module RepoAnalyzer
 
     attr_reader :project_path
 
-    def initialize(repo_name, project_path = '.')
+    def initialize(repo_name, project_path = Rails.root.to_s)
       @repo_name = repo_name
       @project_path = project_path
     end
