@@ -41,7 +41,7 @@ module RepoAnalyzer
 
     def github_client
       @github_client ||= RepoAnalyzer::GithubClient.new(
-        ENV["GITHUB_PERSONAL_TOKEN"]
+        RepoAnalyzer.github_personal_token
       )
     end
   end
