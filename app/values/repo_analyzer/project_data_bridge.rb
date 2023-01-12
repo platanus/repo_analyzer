@@ -40,7 +40,9 @@ module RepoAnalyzer
     attr_reader :repo_name
 
     def github_client
-      @github_client ||= GithubClient.new(ENV["GITHUB_PERSONAL_TOKEN"])
+      @github_client ||= RepoAnalyzer::GithubClient.new(
+        ENV["GITHUB_PERSONAL_TOKEN"]
+      )
     end
   end
 end
