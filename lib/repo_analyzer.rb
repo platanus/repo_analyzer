@@ -27,12 +27,20 @@ module RepoAnalyzer
   #   config.root_url = "Another value"
   # end
 
-  attr_writer :github_personal_token
+  attr_writer :github_personal_token, :post_extracted_info_endpoint
 
   def github_personal_token
     return ENV["GITHUB_PERSONAL_TOKEN"] unless @github_personal_token
 
     @github_personal_token
+  end
+
+  def post_extracted_info_endpoint
+    if @post_extracted_info_endpoint.blank?
+      return "http://localhost:3000/api/v1/repo_analyzer/project_info"
+    end
+
+    @post_extracted_info_endpoint
   end
 
   def setup
