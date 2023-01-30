@@ -25,18 +25,25 @@ describe RepoAnalyzer::PostExtractedInfoJob, type: :job do
     }.to_json
   end
 
+  let(:nest_url) do
+    "https://platan.us/api/v1/repo_analyzer/project_info"
+  end
+
   def perform_now
     described_class.perform_now(repo_name, project_info)
   end
 
   before do
     allow(Net::HTTP).to receive(:post).and_return(response)
+    allow(ENV).to receive(:[])
+      .with("REPO_ANALYZER_URL")
+      .and_return(nest_url)
   end
 
   it do
     expect(perform_now).to eq(condition_result)
     expect(Net::HTTP).to have_received(:post).with(
-      URI("http://localhost:3000/api/v1/repo_analyzer/project_info"),
+      URI(nest_url),
       expected_post_data,
       "Content-Type" => "application/json"
     ).once
