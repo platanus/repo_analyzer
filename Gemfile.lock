@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    repo_analyzer (0.1.0)
+    repo_analyzer (1.0.0)
       brakeman
       octokit (~> 4.0)
       rails (>= 6.0)
