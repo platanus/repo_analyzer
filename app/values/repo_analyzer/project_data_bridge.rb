@@ -4,7 +4,7 @@ module RepoAnalyzer
 
     attr_reader :project_path
 
-    def initialize(repo_name, project_path = '.')
+    def initialize(repo_name, project_path = Rails.root.to_s)
       @repo_name = repo_name
       @project_path = project_path
     end
@@ -40,7 +40,9 @@ module RepoAnalyzer
     attr_reader :repo_name
 
     def github_client
-      @github_client ||= GithubClient.new(ENV["GITHUB_PERSONAL_TOKEN"])
+      @github_client ||= RepoAnalyzer::GithubClient.new(
+        RepoAnalyzer.github_personal_token
+      )
     end
   end
 end

@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/repo_analyzer.svg)](https://badge.fury.io/rb/repo_analyzer)
 [![CircleCI](https://circleci.com/gh/platanus/repo_analyzer.svg?style=shield)](https://app.circleci.com/pipelines/github/platanus/repo_analyzer)
 
-Rails engine to extract technical debt
+Rails engine to extract useful information about the project.
 
 ## Installation
 
@@ -17,44 +17,111 @@ gem "repo_analyzer"
 bundle install
 ```
 
-Then, run the installer:
+Run the installer:
 
 ```bash
 rails generate repo_analyzer:install
 ```
 
+Then, configure ENV vars:
+
+- `GITHUB_PERSONAL_TOKEN`: to extract commits info.
+- `REPO_ANALYZER_URL`: POST endpoint where you want to process extracted info.
+
 ## Usage
 
-TODO
+In order to extract the information you can execute:
+
+```ruby
+RepoAnalyzer::ExtractProjectInfoJob.perform_now("github-repo-name")
+```
+
+Example:
+
+```ruby
+project_info = RepoAnalyzer::ExtractProjectInfoJob.perform_now("platanus/example-project")
+```
+
+You will get something like this:
+
+```ruby
+{
+  circleci_extractor: {
+    "platanus_compose" => false,
+    "jest" => true,
+    "rspec" => true,
+    "system_tests" => true,
+    "code_coverage" => true,
+    "rubocop" => true,
+    "eslint" => true,
+    "stylelint" => true
+  },
+  github_extractor: {
+    "last_commit_date" => "2023-01-25",
+    "last_contributors" => [
+      {
+        "login" => "flouMicaza",
+        "avatar_url" => "https://avatars.githubusercontent.com/u/24324363?v=4",
+        "contributions" => 316
+      },
+      {
+        "login" => "ankaph",
+        "avatar_url" => "https://avatars.githubusercontent.com/u/1688697?v=4",
+        "contributions" => 207
+      }
+    ],
+    "contributors" => [
+      {
+        "login" => "flouMicaza",
+        "avatar_url" => "https://avatars.githubusercontent.com/u/24324363?v=4",
+        "contributions" => 316
+      },
+      {
+        "login" => "ankaph",
+        "avatar_url" => "https://avatars.githubusercontent.com/u/1688697?v=4",
+        "contributions" => 207
+      }
+    ]
+  },
+  power_types_extractor: {
+    "commands" => false,
+    "services" => false,
+    "observers" => true,
+    "values" => false,
+    "utils" => true,
+    "clients" => true
+  },
+  # ...
+}
+```
+
+Each key (`circleci_extractor`, `github_extractor`, `power_types_extractor`, etc) contains useful information about the project that you can use whatever you want.
+Extractors live here: https://github.com/platanus/repo_analyzer/tree/master/app/extractors/repo_analyzer
+
+Then, the extracted information can be posted to some endpoint defined on this ENV var `REPO_ANALYZER_URL` executing:
+
+```ruby
+RepoAnalyzer::PostExtractedInfoJob.perform_now("platanus/example-project", project_info)
+```
+
+### Script
+
+You can extract and POST the info using the following rake task:
+
+```bash
+bin/rake "repo_analyzer:analyze[github-repo-name]"
+```
+
+Example:
+
+```bash
+`bin/rake "repo_analyzer:analyze[platanus/example-project]"`
+```
 
 ## Development
 
-### Models and migrations
-
-- Create dummy app models with development and testing purposes inside the dummy app `spec/dummy`:
-
-  `bin/rails g model user`
-
-  The `User` model will be created in `spec/dummy/app/models`.
-  The `user_spec.rb` file needs to be deleted, but it is a good idea to leave the factory.
-
-- Create engine related models inside the engine's root path '/':
-
-  `bin/rails g model job`
-
-  The `EngineName::Job` model will be created in `app/models/engine_name`.
-  A factory will be added to `engine_name/spec/factories/engine_name/jobs.rb`, you must to add the `class` option manually.
-
-  ```ruby
-  FactoryBot.define do
-    factory :job, class: "EngineName::Job" do
-      # ...
-    end
-  end
-  ```
-
-- While developing the engine run migrations in the root path `bin/rails db:migrate`. This will apply the gem and dummy app migrations too.
-- When using in a project, the engine migrations must be copied to it. This can be done by running: `bin/rails engine_name:install:migrations`
+You can add a new extractor here: https://github.com/platanus/repo_analyzer/tree/master/app/extractors/repo_analyzer
+This one must implement methods defined on this base class: https://github.com/platanus/repo_analyzer/blob/master/app/extractors/repo_analyzer/project_info_extractor.rb#L14
 
 ## Testing
 

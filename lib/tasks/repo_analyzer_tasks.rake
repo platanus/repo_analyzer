@@ -1,4 +1,7 @@
-# desc "Explaining what the task does"
-# task :repo_analyzer do
-#   # Task goes here
-# end
+namespace :repo_analyzer  do
+  desc "Extract repo info and post to defined endpoint"
+  task :analyze, [:repo_name] => :environment do |_t, args|
+    project_info = RepoAnalyzer::ExtractProjectInfoJob.perform_now(args.repo_name)
+    RepoAnalyzer::PostExtractedInfoJob.perform_now(args.repo_name, project_info)
+  end
+end

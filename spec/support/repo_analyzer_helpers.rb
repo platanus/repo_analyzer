@@ -8,7 +8,7 @@ module RepoAnalyzerExtractorHelpers
     let(:repo_name) { "test_project" }
     let(:project_data_bridge) { RepoAnalyzer::ProjectDataBridge.new(repo_name) }
     let(:project_path) { "spec/assets/test_project" }
-    let(:github_client) { instance_double("GithubClient") }
+    let(:github_client) { instance_double("RepoAnalyzer::GithubClient") }
 
     def extract
       extractor.extract
@@ -27,7 +27,7 @@ module RepoAnalyzerExtractorHelpers
 
     before do
       allow(project_data_bridge).to receive(:project_path).and_return(project_path)
-      allow(GithubClient).to receive(:new).and_return(github_client)
+      allow(RepoAnalyzer::GithubClient).to receive(:new).and_return(github_client)
     end
   end
 end

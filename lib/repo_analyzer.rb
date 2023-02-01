@@ -27,6 +27,20 @@ module RepoAnalyzer
   #   config.root_url = "Another value"
   # end
 
+  attr_writer :github_personal_token, :post_extracted_info_endpoint
+
+  def github_personal_token
+    return ENV["GITHUB_PERSONAL_TOKEN"] if @github_personal_token.blank?
+
+    @github_personal_token
+  end
+
+  def post_extracted_info_endpoint
+    return ENV["REPO_ANALYZER_URL"] if @post_extracted_info_endpoint.blank?
+
+    @post_extracted_info_endpoint
+  end
+
   def setup
     yield self
     require "repo_analyzer"
