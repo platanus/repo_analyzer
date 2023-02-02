@@ -56,6 +56,19 @@ describe RepoAnalyzer::TestsInfoExtractor, repo_analyzer_extractor_helpers: true
             "files_count" => 2,
             "tests_count" => 2
           }
+        },
+        "simplecov_coverage" => {
+          "controllers" => 100.0,
+          "clients" => nil,
+          "mailers" => 57.14,
+          "models" => 97.22,
+          "jobs" => 80.23,
+          "policies" => 0.0,
+          "commands" => 100.0,
+          "services" => 100.0,
+          "observers" => 100.0,
+          "utils" => 77.78,
+          "values" => nil
         }
       }
     end

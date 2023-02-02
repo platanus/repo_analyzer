@@ -36,7 +36,8 @@ module RepoAnalyzer
         swagger_tests_count: swagger_tests,
         system_tests_count: system_tests_count,
         jest_tests_count: jest_tests_count,
-        rails_code_coverage: rails_code_coverage.merge(total: coverage_total)
+        rails_code_coverage: rails_code_coverage.merge(total: coverage_total),
+        simplecov_coverage: simplecov_coverage
       }
     end
 
@@ -51,6 +52,25 @@ module RepoAnalyzer
     def jest_tests_count
       project_data_bridge.dir_files("app/javascript").count do |file|
         file.include?("spec.js")
+      end
+    end
+
+    def simplecov_coverage
+      @simplecov_coverage ||= TESTEABLE_RAILS_RESOURCES.inject({}) do |data, resource|
+        covered_percent = coverage_file.dig(
+          "groups", resource.to_s.camelize, "lines", "covered_percent"
+        )
+        data[resource] = covered_percent&.to_f&.round(2)
+        data
+      end
+    end
+
+    def coverage_file
+      @coverage_file ||= begin
+        content = project_data_bridge.file_content("coverage/coverage.json")
+        return {} if content.blank?
+
+        JSON.parse(content).with_indifferent_access
       end
     end
 
