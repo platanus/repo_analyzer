@@ -68,7 +68,8 @@ describe RepoAnalyzer::TestsInfoExtractor, repo_analyzer_extractor_helpers: true
           "services" => 100.0,
           "observers" => 100.0,
           "utils" => 77.78,
-          "values" => nil
+          "values" => nil,
+          "total" => 79.15
         }
       }
     end

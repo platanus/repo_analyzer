@@ -37,7 +37,7 @@ module RepoAnalyzer
         system_tests_count: system_tests_count,
         jest_tests_count: jest_tests_count,
         rails_code_coverage: rails_code_coverage.merge(total: coverage_total),
-        simplecov_coverage: simplecov_coverage
+        simplecov_coverage: simplecov_coverage.merge(total: simplecov_total_percentage)
       }
     end
 
@@ -60,9 +60,18 @@ module RepoAnalyzer
         covered_percent = coverage_file.dig(
           "groups", resource.to_s.camelize, "lines", "covered_percent"
         )
-        data[resource] = covered_percent&.to_f&.round(2)
+        value = covered_percent&.to_f&.round(2)
+        data[resource] = value
+        add_value_to_simplecov_total(value) if value
         data
       end
+    end
+
+    def add_value_to_simplecov_total(value)
+      @simplecov_covered_total ||= 0
+      @simplecov_covered_total += value
+      @simplecov_total ||= 0
+      @simplecov_total += 100
     end
 
     def coverage_file
@@ -95,6 +104,15 @@ module RepoAnalyzer
       end
 
       true
+    end
+
+    def simplecov_total_percentage
+      @simplecov_total_percentage ||= begin
+        return if @simplecov_covered_total.nil? || @simplecov_total.nil?
+        return 0.0 if @simplecov_total.zero?
+
+        (@simplecov_covered_total / @simplecov_total * 100.0).round(2)
+      end
     end
 
     def coverage_total
