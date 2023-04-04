@@ -28,7 +28,7 @@ module RepoAnalyzer
     end
 
     def commits(options = {})
-      github_client.commits(repo_name, options)
+      github_client.commits(repo_name, **options)
     end
 
     def contributors
