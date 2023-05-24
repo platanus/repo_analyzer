@@ -1,6 +1,7 @@
 require "brakeman"
 require "octokit"
 require "rails_best_practices"
+require "reek"
 require "rubocop"
 require "rubocop-performance"
 require "rubocop-platanus"
