@@ -313,8 +313,6 @@ DEPENDENCIES
   repo_analyzer!
   rspec-rails
   rspec_junit_formatter
-  rubocop (~> 1.9)
-  rubocop-rails
   sqlite3
 
 BUNDLED WITH
