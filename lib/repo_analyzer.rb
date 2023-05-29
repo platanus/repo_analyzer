@@ -1,4 +1,5 @@
 require "brakeman"
+require "fasterer"
 require "octokit"
 require "rails_best_practices"
 require "reek"
