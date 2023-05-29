@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency "octokit", "~> 4.0"
   s.add_dependency "rails", ">= 6.0"
   s.add_dependency "rails_best_practices"
+  s.add_dependency "reek"
   s.add_dependency "rubocop", "~> 1.9"
   s.add_dependency "rubocop-performance"
   s.add_dependency "rubocop-platanus", "~> 0.2"
@@ -37,6 +38,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency "pry-rails"
   s.add_development_dependency "rspec_junit_formatter"
   s.add_development_dependency "rspec-rails"
-  s.add_development_dependency "rubocop", "~> 1.9"
-  s.add_development_dependency "rubocop-rails"
 end
