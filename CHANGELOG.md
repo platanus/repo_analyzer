@@ -6,7 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 #### Added
 
-* Add extract [reek](https://github.com/troessner/reek) data.
+* Add [reek](https://github.com/troessner/reek) extractor.
+* Add [fasterer](https://github.com/DamirSvrtan/fasterer) extractor.
 
 ### v1.3.0
 
