@@ -14,12 +14,16 @@ module RepoAnalyzer
         memo[warning["smell_type"]] << {
           lines: warning["lines"],
           message: warning["message"],
-          source: warning["source"],
+          source: relative_file_name(warning["source"]),
           name: warning["name"],
           documentation_link: warning["documentation_link"]
         }
         memo
       end
+    end
+
+    def relative_file_name(file_path)
+      file_path.gsub(%r{\A\D*#{project_data_bridge.project_path}/}, "")
     end
 
     def reek_json
