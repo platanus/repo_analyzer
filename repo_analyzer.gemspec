@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "bundler-audit"
   s.add_dependency "brakeman"
+  s.add_dependency "faraday-retry"
   s.add_dependency "fasterer"
   s.add_dependency "octokit", "~> 4.0"
   s.add_dependency "rails", ">= 6.0"
