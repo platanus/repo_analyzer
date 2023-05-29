@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.executables = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
   s.test_files = Dir["spec/**/*"]
 
+  s.add_dependency "bundler-audit"
   s.add_dependency "brakeman"
   s.add_dependency "fasterer"
   s.add_dependency "octokit", "~> 4.0"
