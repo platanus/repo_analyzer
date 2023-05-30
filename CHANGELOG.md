@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 * Add [reek](https://github.com/troessner/reek) extractor.
 * Add [fasterer](https://github.com/DamirSvrtan/fasterer) extractor.
 * Add [bundler-audit](https://github.com/rubysec/bundler-audit) extractor.
+* Add [bundler-stats](https://github.com/jmmastey/bundler-stats) extractor.
 
 ### v1.3.0
 

@@ -1,4 +1,5 @@
 require "bundler/audit"
+require "bundler/stats"
 require "brakeman"
 require "fasterer"
 require "octokit"
