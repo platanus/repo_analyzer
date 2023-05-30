@@ -1,3 +1,4 @@
+require "bundler/audit"
 require "brakeman"
 require "fasterer"
 require "octokit"
