@@ -63,8 +63,10 @@ describe RepoAnalyzer::BundlerAuditExtractor, repo_analyzer_extractor_helpers: t
     end
 
     before do
-      allow(extractor).to receive(:`).with('bundle-audit update')
-      allow(extractor).to receive(:`).with('bundle-audit check spec/assets/test_project').and_return(audit_result_content)
+      allow(extractor).to receive(:`).with('bundle exec bundle-audit update')
+      allow(extractor).to receive(:`).with(
+        'bundle exec bundle-audit check spec/assets/test_project'
+      ).and_return(audit_result_content)
     end
 
     let(:expected) do

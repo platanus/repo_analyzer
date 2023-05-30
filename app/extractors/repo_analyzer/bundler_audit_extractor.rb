@@ -43,8 +43,8 @@ module RepoAnalyzer
     end
 
     def audit_raw_result
-      `bundle-audit update`
-      `bundle-audit check #{project_data_bridge.project_path}`
+      `bundle exec bundle-audit update`
+      `bundle exec bundle-audit check #{project_data_bridge.project_path}`
     end
   end
 end
