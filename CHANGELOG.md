@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
+
+### Unreleased
+#### Fixed
+
+* Remove [fasterer](https://github.com/DamirSvrtan/fasterer) extractor.
 ### v1.4.0
 #### Added
 
