@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe RepoAnalyzer::ExtractProjectInfoJob, type: :job do
   let(:repo_name) { "platanus/alisur-formulator" }
+  let(:project_path) { "spec/assets/test_project" }
 
   let(:files_list) do
     "app/extractors/repo_analyzer/project_versions_extractor.rb"
@@ -31,7 +32,7 @@ describe RepoAnalyzer::ExtractProjectInfoJob, type: :job do
   let(:engine_root) { instance_double("Pathname", join: files_list) }
 
   def perform_now
-    described_class.perform_now(repo_name)
+    described_class.perform_now(repo_name, project_path)
   end
 
   before do
@@ -44,7 +45,7 @@ describe RepoAnalyzer::ExtractProjectInfoJob, type: :job do
 
   it do
     perform_now
-    expect(RepoAnalyzer::ProjectDataBridge).to have_received(:new).with(repo_name).once
+    expect(RepoAnalyzer::ProjectDataBridge).to have_received(:new).with(repo_name, project_path).once
     expect(RepoAnalyzer::ProjectVersionsExtractor).to have_received(:new).with(bridge).once
   end
 end

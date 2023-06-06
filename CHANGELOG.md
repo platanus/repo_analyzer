@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Unreleased
+#### Added
+
+* Run analyze rake task with custom project path.
 #### Fixed
 
 * Remove [fasterer](https://github.com/DamirSvrtan/fasterer) extractor.
