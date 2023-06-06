@@ -1,8 +1,8 @@
 module RepoAnalyzer
   class ExtractProjectInfoJob < ApplicationJob
-    def perform(repo_name)
+    def perform(repo_name, project_path)
       project_info = {}
-      bridge = RepoAnalyzer::ProjectDataBridge.new(repo_name)
+      bridge = RepoAnalyzer::ProjectDataBridge.new(repo_name, project_path)
 
       for_each_extractor do |extractor|
         extracted_data = extractor.new(bridge).extract
