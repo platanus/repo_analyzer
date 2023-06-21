@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    repo_analyzer (1.5.0)
+    repo_analyzer (1.6.0)
       brakeman
       bundler-audit
       bundler-stats
