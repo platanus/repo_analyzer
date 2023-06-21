@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+### Unreleased
+#### Added
+* Complete [bundler-stats](https://github.com/jmmastey/bundler-stats) extractor data with potential removals
+
 ### v1.5.0
 #### Added
 
